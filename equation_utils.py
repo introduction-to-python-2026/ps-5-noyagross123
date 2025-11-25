@@ -20,6 +20,7 @@ def generate_equation_for_element(compounds, coefficients, element):
     """Generates a symbolic equation for the given element from compounds and coefficients.  
     Example: For H in reactants [{'H': 2}, {'O': 4, 'H': 1}], coefficients [a0, a1], returns 2*a0 + a1."""
     equation = 0
+
     for i, compound in enumerate(compounds):
         if element in compound:
             equation += coefficients[i] * compound[element]
@@ -42,6 +43,7 @@ def build_equations(reactant_atoms, product_atoms):
         if lhs != 0 or rhs != 0:
             equations.append(Eq(lhs, rhs))
 
+
     return equations, reactant_coefficients + product_coefficients[:-1]
 
 
@@ -49,6 +51,7 @@ def my_solve(equations, coefficients):
     """Solves the system of equations for the coefficients of the reaction.  
     Example: For equations [2*a0 - 2*b0, a1 - b0], returns [1.0, 1.0]."""
     solution = sympy_solve(equations, coefficients)
+
 
     if len(solution) == len(coefficients):
         coefficient_values = list()
